@@ -1,6 +1,6 @@
 aura-ng
 =======
-Aura-ng is a component library that provides integration between Aura (technology that powers Force.com Lightning Components) and the Angular.js javascript library. This project is very much in a nascent state, but there is enough functionality to provide you with a view into where we plan to take this. Here are some of the current capabilities:
+Aura-ng is a Force.com component library that provides integration between Aura (technology that powers Force.com Lightning Components) and the Angular.js javascript library. This project is very much in a nascent state, but there is enough functionality to provide you with a view into where we plan to take this. Here are some of the current capabilities:
 
 - automatic once and only once loading and initialization semantics for Angular JS library
 - container components attributes are automatically surfaced as properties on the $scope.v object
@@ -11,6 +11,10 @@ Here are some of the things to look forward to:
 - multi-version support to allow a specific version of angular.JS to be specified at the region level
 - automatic surfacing of aura components as angular directives for use within Angular regions
 - full support for aura:iteration and ng-repeat
+
+Installation into your Force.com org
+====================================
+The library is available as an installable force.com namespaced managed package [here](https://login.salesforce.com/packaging/installPackage.apexp?p0=04to0000000JiGn). The code in this repository is for informational purposes only currently and is a direct copy of the package made by using the force.com command line interface. Your Salesforce.com organization will need to have the Enable Lightning Components preference enabled in Setup In order for you to be able to try out aurang:region in your own components.
 
 Getting Started
 ===============
