@@ -8,6 +8,7 @@ Aura-ng is a Force.com component library that provides integration between Aura 
 
 Here are some of the things to look forward to:
 
+- I'm working to get the changes introduced into the aura framework that will remove the need for the **data-** prefixes that we currently have to use to work around an aura issue or custom attributes are being incorrectly assigned as properties on Dom elements instead of attributes
 - multi-version support to allow a specific version of angular.JS to be specified at the region level
 - automatic surfacing of aura components as angular directives for use within Angular regions
 - full support for aura:iteration and ng-repeat
@@ -36,3 +37,4 @@ Here is a snippet taken directly from the samples:
   </aurang:region>
 </aura:component>
 ```
+that demostrates referencing Aura attributes from Angular {{}} expressions - including iterating using ng-repeat over a collection passed into the component via an Aura attribute. The automatically apllied add-aura-scope directive takes care of publishing Aura attributes to the region's scope.
