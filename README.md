@@ -3,6 +3,7 @@ aura-ng
 Aura-ng is a Force.com component library that provides integration between Aura (technology that powers Force.com Lightning Components) and the Angular.js javascript library. This project is very much in a nascent state, but there is enough functionality to provide you with a view into where we plan to take this. Here are some of the current capabilities:
 
 - automatic once and only once loading and initialization semantics for Angular JS library
+- correctly invokes `angular.bootstrap()` at the right time in the aura component lifecycle
 - container components attributes are automatically surfaced as properties on the $scope.v object
 - easy to use configuration event that allows you to wire in your angular code after all initialization of both aura and angular has been negotiated for you
 
