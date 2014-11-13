@@ -38,4 +38,4 @@ Here is a snippet taken directly from the samples:
   </aurang:region>
 </aura:component>
 ```
-that demostrates referencing Aura attributes from Angular *{{blah}}* expressions - including iterating using ng-repeat over a collection passed into the component via an Aura attribute. The automatically apllied add-aura-scope directive takes care of publishing Aura attributes to the region's scope.
+that demostrates referencing Aura attributes from Angular *{{blah}}* expressions - including iterating using ng-repeat over a collection passed into the component via an Aura attribute. The automatically applied `add-aura-scope` directive takes care of publishing Aura attributes to the region's scope.
