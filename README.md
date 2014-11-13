@@ -16,6 +16,8 @@ Installation into your Force.com org
 ====================================
 The library is available as an installable force.com namespaced managed package [here](https://login.salesforce.com/packaging/installPackage.apexp?p0=04to0000000JiGn). The code in this repository is for informational purposes only currently and is a direct copy of the package made by using the force.com command line interface. Your Salesforce.com organization will need to have the Enable Lightning Components preference enabled in Setup In order for you to be able to try out aurang:region in your own components.
 
+After successfully installing the package into your org, you can try out the included demo application at /aurang/regionDemoApp.app
+
 Getting Started
 ===============
 Aura-ng consists of a single or a component called aurang:region. You simply wrap the regions of Angular markup in your component with `<aurang:region>your Angular markup goes here</aurang:region>` and then write your angular specific JavaScript inside of a standard aura client-side controller method.
