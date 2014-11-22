@@ -22,7 +22,7 @@ After successfully installing the package into your org, you can try out the inc
 
 Getting Started
 ===============
-Aura-ng consists of a single or a component called aurang:region. You simply wrap the regions of Angular markup in your component with `<aurang:region>your Angular markup goes here</aurang:region>` and then write your angular specific JavaScript inside of a standard aura client-side controller method.
+Aura-ng consists of a single Aura component called aurang:region. You simply wrap the regions of Angular markup in your component with `<aurang:region>your Angular markup goes here</aurang:region>` and then write your angular specific JavaScript inside of a standard aura client-side controller method.
 
 This repository contains a fully functioning sample application [regionDemoApp.app](https://github.com/forcedotcom/aura-ng/blob/master/metadata/aura/regionDemoApp/regionDemoAppApplication.app) and component [regionDemoComponent.cmp](https://github.com/forcedotcom/aura-ng/blob/master/metadata/aura/regionDemo/regionDemoComponent.cmp) that demonstrate a number of different uses of the region component.
 
