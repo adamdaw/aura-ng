@@ -18,9 +18,8 @@
 ({
     init: function(component, event, helper) {
         helper.loadAngular(component, function() {
-        	var angularWithAuraApp;
             try {
-            	angularWithAuraApp = angular.module("auraNgModule");
+            	angular.module("auraNgModule");
             } catch (x) {
                 // Register the Aura-Angular bridge controller
                 var module = angular.module("auraNgModule", []);
@@ -45,12 +44,13 @@
                         }
                     };
                 });
-                
-                try {
-                	angularWithAuraApp = angular.module("angularWithAuraApp");
-                } catch (x) {
-                    angularWithAuraApp = angular.module("angularWithAuraApp", []);
-                }
+            }
+            
+            var angularWithAuraApp;
+            try {
+                angularWithAuraApp = angular.module("angularWithAuraApp");
+            } catch (x) {
+                angularWithAuraApp = angular.module("angularWithAuraApp", []);
             }
             
             // Fire the configure event 
