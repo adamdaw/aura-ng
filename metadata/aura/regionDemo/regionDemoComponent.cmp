@@ -19,6 +19,16 @@
     <aura:attribute name="value" type="string[]"/>
     <aura:handler name="init" value="{!this}" action="{!c.init}" />
     
+    <aurang:template id="/templates/footerTemplate.html">
+    	<div class="control-group"> 
+    		<div class="controls">
+				<label for="{{formId}}">{{label}}</label>
+				<input type="text" class="input-xlarge" id="{{formId}}" name="{{formId}}" data-ng-model="fieldValue"/>
+				{{fieldValue}}
+			</div>
+		</div>
+    </aurang:template>
+
     <div class="content">
         <div class="header"><img src="/resource/aurang__auranglogo" class="logo"/></div>
 	    

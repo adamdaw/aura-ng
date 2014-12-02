@@ -49,13 +49,7 @@
 	                label: '@label',
 	                formId: '@formId'
 	            },
-	            template: '<div class="control-group">' +
-	                         '<div class="controls">' +
-	                             '<label for="{{formId}}">{{label}}</label>' +
-	                             '<input type="text" class="input-xlarge" id="{{formId}}" name="{{formId}}" ng-model="fieldValue">' +
-		                         '{{fieldValue}}' +
-	                         '</div>' +
-	                     '</div>'
+	            templateUrl: "/templates/footerTemplate.html"
 	        }
 	    });
 	}
