@@ -23,9 +23,6 @@
 	},
     
     unrender: function(component, helper) {
-        
-        debugger
-        
         // Synchronously remove elements because Angular gets very unhappy if we leave them in the DOM
         var el = component.find("locator").getElement();
         $A.util.removeElement(el);
