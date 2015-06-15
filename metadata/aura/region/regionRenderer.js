@@ -16,6 +16,20 @@
 
 */
 ({
+    render: function(component, helper) {
+		var ret = this.superRender();
+        
+        var content = document.createElement("DIV");
+                    
+     	$A.render(component.get("v.body"), content);
+        
+        // Convert CDATA content to HTML - security???
+        var el = component.find("locator").getElement();
+        el.innerHTML = content.innerText;
+        
+        return ret;
+    },
+    
 	afterRender: function(component, helper) {
 		this.superAfterRender();
 		

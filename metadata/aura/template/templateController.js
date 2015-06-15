@@ -7,6 +7,7 @@
                 var id = component.get("v.id");
                 if (!$templateCache.get(id)) {
                     var content = document.createElement("DIV");
+                    
                     $A.render(component.get("v.body"), content);
         
                     $templateCache.put(id, content.innerHTML);

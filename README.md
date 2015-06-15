@@ -6,17 +6,18 @@ Aura-ng is a Force.com component library that provides integration between Aura 
 - correctly invokes `angular.bootstrap()` at the right time in the aura component lifecycle
 - container components attributes are automatically surfaced as properties on the $scope.v object
 - easy to use configuration event that allows you to wire in your angular code after all initialization of both aura and angular has been negotiated for you
+- aurang-component directive that allows use of Aura components in Angular templates and directives such as ng-repeat
 
 Here are some of the things to look forward to:
 
-- I'm working to get the changes introduced into the aura framework that will remove the need for the **data-** prefixes that we currently have to use to work around an aura issue or custom attributes are being incorrectly assigned as properties on Dom elements instead of attributes
+- I'm working to get the changes introduced into the aura framework that will remove the need for the **data-** prefixes or CDATA blocks that we currently have to use to work around an aura issue or custom attributes are being incorrectly assigned as properties on Dom elements instead of attributes
 - multi-version support to allow a specific version of angular.JS to be specified at the region level
 - automatic surfacing of aura components as angular directives for use within Angular regions
-- full support for aura:iteration and ng-repeat
+- full support for aura:iteration
 
 Installation into your Force.com org
 ====================================
-The library is available as an installable force.com namespaced managed package [here](https://login.salesforce.com/packaging/installPackage.apexp?p0=04to0000000Jkw4). The code in this repository is for informational purposes only currently and is a direct copy of the package made by using the force.com command line interface. Your Salesforce.com organization will need to have the Enable Lightning Components preference enabled in Setup In order for you to be able to try out aurang:region in your own components.
+The library is available as an installable force.com namespaced managed package [here](https://login.salesforce.com/packaging/installPackage.apexp?p0=04to0000000JlZM). The code in this repository is for informational purposes only currently and is a direct copy of the package made by using the force.com command line interface. Your Salesforce.com organization will need to have the Enable Lightning Components preference enabled in Setup In order for you to be able to try out aurang:region in your own components.
 
 After successfully installing the package into your org, you can try out the included demo application at /aurang/regionDemoApp.app.
 
@@ -38,4 +39,19 @@ Here is a snippet taken directly from the samples:
   </aurang:region>
 </aura:component>
 ```
-that demonstrates referencing Aura attributes from Angular *{{blah}}* expressions - including iterating using ng-repeat over a collection passed into the component via an Aura attribute. The automatically applied `add-aura-scope` directive takes care of publishing Aura attributes to the region's scope.
+that demonstrates referencing Aura attributes from Angular *{{blah}}* expressions - including iterating using ng-repeat over a collection passed into the component via an Aura attribute. The automatically applied `add-aura-scope` directive takes care of publishing Aura attributes to the region's scope
+
+This example illustrates how to use aurang-component inside of ng-repeat to correctly create one Aura component instance per row in the Angular iteration:
+
+```
+<c:region configure="{!c.configurePhoneRegion}">
+    <![CDATA[
+    <ul ng-controller="PhoneCtrl">
+        <li ng-repeat="phone in phones">
+            {{phone.name}}
+        	<aurang-component aurang-tag="ui:button" label="{{phone.name}}"/>
+        </li>
+    </ul>
+	]]>
+</c:region>
+```

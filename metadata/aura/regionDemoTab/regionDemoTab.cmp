@@ -1,0 +1,3 @@
+<aura:component implements="force:appHostable">
+    <aurang:regionDemo/>
+</aura:component>

@@ -16,51 +16,104 @@
 
 */
 ({
-    init: function(component, event, helper) {
-        helper.loadAngular(component, function() {
-            try {
-            	angular.module("auraNgModule");
-            } catch (x) {
-                // Register the Aura-Angular bridge controller
-                var module = angular.module("auraNgModule", []);
-                            
-                module.directive('addAuraScope', function () {
-                    return {
-                    	restrict: 'AE',
-                        link: function ($scope, element, attrs) {                            
-                            var renderedBy = $A.getCmp(attrs.auraRenderedBy);
-                            var cvp = renderedBy.getComponentValueProvider().getComponentValueProvider();
-                            
-                            // DCHASMAN TODO Figure out how to keep these in sync bidirectionally with Angular
-                            $scope.v = {};
-                                                
-                            cvp.getDef().getAttributeDefs().each(function(a) {
-                                var type = a.getTypeDefDescriptor();
-                                if (type !== "aura://Aura.Component[]") {
-                                    var name = a.getDescriptor().getName();
-                                    $scope.v[name] = cvp.get("v." + name);
-                                }
-                            });   
-                        }
-                    };
+    angularLoaded: function(component, event, helper) {
+        try {
+            angular.module("auraNgModule");
+        } catch (x) {
+            // Register the Aura-Angular bridge controller
+            var module = angular.module("auraNgModule", []);
+            
+            module.directive('addAuraScope', function () {
+                return {
+                    restrict: 'AE',
+                    link: function ($scope, element, attrs) {                            
+                        var renderedBy = $A.getCmp(attrs.auraRenderedBy);
+                        var cvp = renderedBy.getComponentValueProvider().getComponentValueProvider();
+                        
+                        // DCHASMAN TODO Figure out how to keep these in sync bidirectionally with Angular
+                        $scope.v = {};
+                        
+                        cvp.getDef().getAttributeDefs().each(function(a) {
+                            var type = a.getTypeDefDescriptor();
+                            if (type !== "aura://Aura.Component[]") {
+                                var name = a.getDescriptor().getName();
+                                $scope.v[name] = cvp.get("v." + name);
+                            }
+                        });   
+                    }
+                };
+            });
+            
+            function createComponent(element, tag, clientCreatable, attributes) {
+                $A.run(function() {
+                    $A.componentService.newComponentAsync(
+                        this,
+                        function(component){
+                            var parent = document.createElement("div");
+                            $A.render(component, parent);
+    
+                            element.replaceWith(parent);
+                        },
+                        {
+                            "componentDef": "markup://" + tag,
+                            "attributes": {
+                                "values": attributes
+                            }
+                        }, undefined, false, clientCreatable, !clientCreatable
+                    );
                 });
             }
             
-            var angularWithAuraApp;
-            try {
-                angularWithAuraApp = angular.module("angularWithAuraApp");
-            } catch (x) {
-                angularWithAuraApp = angular.module("angularWithAuraApp", []);
-            }
-            
-            // Fire the configure event 
-            var configureEvent = component.getEvent("configure");
-            configureEvent.setParams({ "angular": angular });
-            configureEvent.setParams({ "module": angularWithAuraApp });
-            configureEvent.fire();
-            
-            component._angular = angular;
-    		helper.bootstrap(component);
-        });
+        	module.directive("aurangComponent", function() {
+                return {
+                    link: function(scope, element, attr) {
+                        var tag = attr.aurangTag;
+    
+                        // Check to see if we know about the component - enforce aura:dependency is used to avoid silent performance killer
+                        var def;
+                        try {
+                            def = $A.componentService.getDef(tag);
+                        } catch (e) {
+                            if ("Unknown component: markup://" + tag === e.message) {
+                                $A.error("No component definiton for " + tag + " in the client registry - perhaps you need to add <aura:dependency resource=\"" + tag + "\"/>?");
+                            } else {
+                                throw e;
+                            }
+                        }
+    
+                        var clientCreatable = attr.ltngClientCreatable !== "false";
+    
+                        // Build up the LC attributes from the directives attributes
+                        var lightningAttributes = {};
+    
+                        var attrDefs = def.getAttributeDefs();
+                        for (name in attr) {
+                            var attrDef = attrDefs.getDef(name);
+                            if (attrDef) {
+                                lightningAttributes[name] = attr[name];
+                            }
+                        }
+    
+                        createComponent(element, tag, clientCreatable, lightningAttributes);
+                    }
+                };
+            });
+        }
+        
+        var angularWithAuraApp;
+        try {
+            angularWithAuraApp = angular.module("angularWithAuraApp");
+        } catch (x) {
+            angularWithAuraApp = angular.module("angularWithAuraApp", []);
+        }        
+        
+        // Fire the configure event 
+        var configureEvent = component.getEvent("configure");
+        configureEvent.setParams({ "angular": angular });
+        configureEvent.setParams({ "module": angularWithAuraApp });
+        configureEvent.fire();
+        
+        component._angular = angular;
+        helper.bootstrap(component);
     }
 })

@@ -1,4 +1,4 @@
-/*
+<!--
 
     Copyright (C) 2014 salesforce.com, inc.
 
@@ -14,12 +14,8 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 
-*/
-({  
-    bootstrap: function(component) {
-	    if (!component._bootstrapped && component._angular && component.isRendered()) {
-        	component._bootstrapped = true;
-        	component._angular.bootstrap(component.find("locator").getElement(), ["auraNgModule", "angularWithAuraApp"]);
-	    }
-    }
-})
+-->
+<aura:event type="COMPONENT" access="GLOBAL">
+	<aura:attribute name="angular" type="Object" access="GLOBAL" required="true"/>
+	<aura:attribute name="module" type="Object" access="GLOBAL" required="true"/>
+</aura:event>

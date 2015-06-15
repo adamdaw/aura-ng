@@ -1,4 +1,4 @@
-/*
+<!--
 
     Copyright (C) 2014 salesforce.com, inc.
 
@@ -14,12 +14,9 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 
-*/
-({  
-    bootstrap: function(component) {
-	    if (!component._bootstrapped && component._angular && component.isRendered()) {
-        	component._bootstrapped = true;
-        	component._angular.bootstrap(component.find("locator").getElement(), ["auraNgModule", "angularWithAuraApp"]);
-	    }
-    }
-})
+-->
+<aura:component access="GLOBAL">
+    <aura:registerevent name="configure" type="c:configureRegion" access="GLOBAL"/>
+    <ltng:require scripts="/resource/aurang__angularjs" afterScriptsLoaded="{!c.angularLoaded}"/>
+    <div aura:id="locator" data-add-aura-scope="true"/>
+</aura:component>
