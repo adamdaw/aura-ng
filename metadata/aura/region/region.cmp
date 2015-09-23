@@ -16,7 +16,9 @@
 
 -->
 <aura:component access="GLOBAL">
+    <aura:dependency resource="ltng:require"/>
+    <aura:attribute name="scripts" type="String[]" access="GLOBAL" description="The optional set of additional scripts in dependency order that will be loaded after Angularjs."/>
     <aura:registerevent name="configure" type="c:configureRegion" access="GLOBAL"/>
-    <ltng:require scripts="/resource/aurang__angularjs" afterScriptsLoaded="{!c.angularLoaded}"/>
+    <aura:handler name="init" value="{!this}" action="{!c.init}"/>
     <div aura:id="locator" data-add-aura-scope="true"/>
 </aura:component>

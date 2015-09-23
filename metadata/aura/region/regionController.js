@@ -16,6 +16,21 @@
 
 */
 ({
+    init: function(component, event, helper) {
+        var scripts = component.get("v.scripts");
+        scripts.unshift("/resource/aurang__angularjs");
+
+        // Dynamically add in <ltng:require scripts="{!v.scripts}" afterScriptsLoaded="{!c.angularLoaded}"/>
+        $A.createComponent("ltng:require", {
+            scripts: scripts,
+            afterScriptsLoaded: component.getReference("c.angularLoaded")
+        }, function(requireCmp) {
+            var body = component.get("v.body");
+            body.push(requireCmp);
+            component.set("v.body", body);
+        });    
+    },
+
     angularLoaded: function(component, event, helper) {
         try {
             angular.module("auraNgModule");
