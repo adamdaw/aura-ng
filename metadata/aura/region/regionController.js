@@ -25,9 +25,7 @@
             scripts: scripts,
             afterScriptsLoaded: component.getReference("c.angularLoaded")
         }, function(requireCmp) {
-            var body = component.get("v.body");
-            body.push(requireCmp);
-            component.set("v.body", body);
+            component.set("v.dynamicRequire", [requireCmp]);
         });    
     },
 

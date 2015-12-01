@@ -17,21 +17,20 @@
 */
 ({
     render: function(component, helper) {
-		var ret = this.superRender();
-        
-        var content = document.createElement("DIV");
-                    
-     	$A.render(component.get("v.body"), content);
-        
-        // Convert CDATA content to HTML - security???
+		var ret = component.superRender();
+                            
         var el = component.find("locator").getElement();
-        el.innerHTML = content.innerText;
+        
+        var inertRegionRenderer = component.find("inertRegionRenderer");
+        inertRegionRenderer.sanitizedRendering(component, function(sanitizedHtml) {
+        	el.innerHTML = sanitizedHtml;    
+        });
         
         return ret;
     },
     
 	afterRender: function(component, helper) {
-		this.superAfterRender();
+		component.superAfterRender();
 		
 		helper.bootstrap(component);
 	},
@@ -41,6 +40,6 @@
         var el = component.find("locator").getElement();
         $A.util.removeElement(el);
         
-		this.superUnrender();
+		component.superUnrender();
 	}
 })

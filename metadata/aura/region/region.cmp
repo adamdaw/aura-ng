@@ -18,7 +18,10 @@
 <aura:component access="GLOBAL">
     <aura:dependency resource="ltng:require"/>
     <aura:attribute name="scripts" type="String[]" access="GLOBAL" description="The optional set of additional scripts in dependency order that will be loaded after Angularjs."/>
+    <aura:attribute name="dynamicRequire" type="Aura.Component[]" access="PRIVATE"/>
     <aura:registerevent name="configure" type="c:configureRegion" access="GLOBAL"/>
     <aura:handler name="init" value="{!this}" action="{!c.init}"/>
+    <aurang:inertRegion aura:id="inertRegionRenderer"/>
     <div aura:id="locator" data-add-aura-scope="true"/>
+    {!v.dynamicRequire}
 </aura:component>

@@ -1,0 +1,6 @@
+<aura:component extensible="true">
+    <aura:method name="sanitizedRendering" action="{!c.sanitizedRendering}">
+        <aura:attribute name="root" type="Aura.Component[]"/> 
+        <aura:attribute name="callback" type="Object"/> 
+    </aura:method>
+</aura:component>

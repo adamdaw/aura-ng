@@ -17,6 +17,7 @@
 -->
 <aura:component access="GLOBAL">
     <aura:attribute name="value" type="string[]"/>
+    <aura:attribute name="shouldNotRender" type="string" default="shouldNotRenderInRegion"/>
     <aura:handler name="init" value="{!this}" action="{!c.init}" />
     <aura:dependency resource="ui:button"/>
     
@@ -53,7 +54,7 @@
                 <![CDATA[
 				<div form-input="true" label="Name" form-id="nameInput"/>
 				]]>
-			</c:region>
+            </c:region>
 		</div>
 	</div>
 </aura:component>

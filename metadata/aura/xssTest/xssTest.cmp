@@ -1,0 +1,21 @@
+<aura:component >
+	<aura:handler name="init" value="{!this}" action="{!c.init}" />
+	<aura:attribute name="someAttribute" type="string" required="true" default="undefined"/>
+    <aura:attribute name="buyerName" type="string" default="smith"/>
+  	<div class="content">
+     	<aurang:region configure="c.configurePhoneRegion">
+            <!-- test for attribute escaping -->
+             <p>Rendering an aura attribute within angular region: '{!v.someAttribute}'</p>
+            <!-- test for template injection -->
+             <p />
+             Next, we try to inject phone snippets where the buyer name should be:
+             <![CDATA[
+                 <ul data-ng-controller="PhoneCtrl">
+                    <li data-ng-repeat="phone in phones">
+                        Hello {!v.buyerName}, a phone option is: {{phone.name}}
+                     </li>
+                 </ul>
+            ]]>
+         </aurang:region>
+      </div>
+</aura:component>
