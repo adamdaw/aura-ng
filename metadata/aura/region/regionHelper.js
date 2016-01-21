@@ -19,7 +19,8 @@
     bootstrap: function(component) {
 	    if (!component._bootstrapped && component._angular && component.isRendered()) {
         	component._bootstrapped = true;
-        	component._angular.bootstrap(component.find("locator").getElement(), ["auraNgModule", "angularWithAuraApp"]);
+            var el = component.find("locator").getElement();
+            component._angular.bootstrap(el, ["auraNgModule", "angularWithAuraApp"], { strictDi: true });
 	    }
     }
 })

@@ -34,11 +34,11 @@
             angular.module("auraNgModule");
         } catch (x) {
             // Register the Aura-Angular bridge controller
-            var module = angular.module("auraNgModule", []);
+            var module = angular.module("auraNgModule", component.get("v.modules"));
             
-            module.directive('addAuraScope', function () {
+            module.directive("addAuraScope", function () {
                 return {
-                    restrict: 'AE',
+                    restrict: "AE",
                     link: function ($scope, element, attrs) {                            
                         var renderedBy = $A.getCmp(attrs.auraRenderedBy);
                         var cvp = renderedBy.getComponentValueProvider().getComponentValueProvider();
